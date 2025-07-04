@@ -1,0 +1,121 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #c7dcf0;
+  padding: 1em;
+}
+
+.main-header {
+  background: #222;
+  color: #fff;
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Product list vertical layout */
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Product item styling */
+.product-list li {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  flex-direction: row;
+  transition: box-shadow 0.2s;
+}
+
+.product-list li:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* Product image */
+.product-list img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fafafa;
+}
+
+/* Product name and price */
+.product-list b {
+  font-size: 1.1rem;
+  color: #222;
+  display: block;
+}
+
+.product-list span {
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Product details hidden by default, shown on hover with animation */
+.product-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  background: #f4f8fb;
+  color: #222;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease-out, padding 0.4s ease-out;
+}
+
+/* Show details on hover */
+.product-list li:hover .product-details {
+  max-height: 300px;
+  opacity: 1;
+  padding: 1rem;
+}
+
+.main-footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 1.2rem 0 1rem 0;
+  margin-top: 3rem;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.main-footer a {
+  color: #27ae60;
+  text-decoration: none;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .product-list {
+    max-width: 95vw;
+  }
+  .product-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

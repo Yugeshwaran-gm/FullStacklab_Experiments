@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Students</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h2>All Students</h2>
+  <a href="/form.html">Add New Student</a><br><br>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Actions</th>
+    </tr>
+    <% students.forEach(student => { %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.email %></td>
+        <td><%= student.age %></td>
+        <td>
+          <form action="/edit/<%= student._id %>" method="GET" style="display:inline;">
+            <button>Edit</button>
+          </form>
+          <form action="/delete/<%= student._id %>" method="GET" onsubmit="return confirm('Delete this student?');" style="display:inline;">
+            <button class="delete">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>

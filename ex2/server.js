@@ -1,45 +1,35 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const exphbs = require('express-handlebars');
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static('public'));
-
-// View Engine Setup
+// Handlebars setup
+const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('form');
+    res.render('home');
 });
 
 app.post('/submit', (req, res) => {
-  const formData = req.body;
-
-  // Save to JSON file
-  fs.writeFile('data.json', JSON.stringify(formData, null, 2), (err) => {
-    if (err) return res.status(500).send('Error saving data.');
-    res.redirect('/result');
-  });
+    const formData = req.body;
+    fs.writeFileSync('data.json', JSON.stringify(formData, null, 2));
+    res.redirect('/display');
 });
 
-app.get('/result', (req, res) => {
-  fs.readFile('data.json', 'utf-8', (err, data) => {
-    if (err) return res.status(500).send('Error reading data.');
-    const student = JSON.parse(data);
-    res.render('result', { student });
-  });
+app.get('/display', (req, res) => {
+    const data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+    res.render('display', { data });
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
